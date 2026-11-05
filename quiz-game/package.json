@@ -1,0 +1,12 @@
+{
+  "name": "quiz-game",
+  "version": "1.0.0",
+  "description": "Browser quiz game with branching paths and an admin backend for loading questionnaires",
+  "private": true,
+  "type": "commonjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

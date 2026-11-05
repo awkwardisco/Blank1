@@ -1,0 +1,88 @@
+{
+  "id": "space-trivia",
+  "title": "Space Trivia: Choose Your Difficulty",
+  "description": "Get the first question right and the quiz gets harder. Miss it and you take the gentler route.",
+  "published": true,
+  "settings": { "showFeedback": true },
+  "start": "intro",
+  "results": [
+    { "min": 0, "title": "Space Rookie", "text": "Every astronaut starts somewhere." },
+    { "min": 2, "title": "Cadet", "text": "Solid basics, so keep looking up." },
+    { "min": 4, "title": "Mission Commander", "text": "Outstanding; you know your way around the solar system." }
+  ],
+  "nodes": {
+    "intro": {
+      "type": "info",
+      "title": "Mission briefing",
+      "text": "Answer correctly and the questions get tougher, but they are worth more points.",
+      "next": "q1"
+    },
+    "q1": {
+      "type": "question",
+      "text": "Which planet is known as the Red Planet?",
+      "options": [
+        { "text": "Venus" },
+        { "text": "Mars", "correct": true },
+        { "text": "Jupiter" },
+        { "text": "Mercury" }
+      ],
+      "explanation": "Iron oxide (rust) on the surface gives Mars its red colour.",
+      "onCorrect": "hard1",
+      "onIncorrect": "easy1"
+    },
+    "easy1": {
+      "type": "question",
+      "text": "Which planet is the largest in our solar system?",
+      "options": [
+        { "text": "Earth" },
+        { "text": "Jupiter", "correct": true },
+        { "text": "Saturn" },
+        { "text": "Neptune" }
+      ],
+      "explanation": "Jupiter is more than twice as massive as all the other planets combined.",
+      "next": "easy2"
+    },
+    "easy2": {
+      "type": "question",
+      "text": "What do we call the star at the centre of our solar system?",
+      "kind": "text",
+      "answers": ["The Sun", "Sun", "Sol"],
+      "explanation": "The Sun holds 99.8% of the solar system's mass.",
+      "next": "verdict"
+    },
+    "hard1": {
+      "type": "question",
+      "kind": "multi",
+      "text": "Which of these are gas giants? (Select all that apply.)",
+      "points": 2,
+      "options": [
+        { "text": "Jupiter", "correct": true },
+        { "text": "Mars" },
+        { "text": "Saturn", "correct": true },
+        { "text": "Neptune", "correct": true }
+      ],
+      "explanation": "Jupiter and Saturn are gas giants; Neptune is usually called an ice giant but is grouped with them here.",
+      "next": "hard2"
+    },
+    "hard2": {
+      "type": "question",
+      "kind": "text",
+      "text": "What is the name of Saturn's largest moon?",
+      "points": 2,
+      "answers": ["Titan"],
+      "explanation": "Titan has a thick atmosphere and lakes of liquid methane.",
+      "next": "verdict"
+    },
+    "verdict": {
+      "type": "branch",
+      "rules": [
+        { "if": { "scoreAtLeast": 4 }, "goto": "end_commander" },
+        { "if": { "scoreAtLeast": 2 }, "goto": "end_cadet" }
+      ],
+      "else": "end_rookie"
+    },
+    "end_commander": { "type": "end", "title": "Mission Commander", "text": "Top marks on the hard route. Take the captain's chair!" },
+    "end_cadet": { "type": "end", "title": "Cadet", "text": "A good flight. Try the other route for a different challenge." },
+    "end_rookie": { "type": "end", "title": "Space Rookie", "text": "Plenty of room to grow. Have another go!" }
+  }
+}

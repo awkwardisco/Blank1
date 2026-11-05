@@ -1,0 +1,63 @@
+{
+  "id": "which-explorer",
+  "title": "Which Kind of Explorer Are You?",
+  "description": "A personality quiz. Your answers add tags and the quiz branches to your result.",
+  "published": true,
+  "settings": { "showFeedback": false },
+  "start": "q1",
+  "nodes": {
+    "q1": {
+      "type": "question",
+      "text": "Your perfect Saturday morning?",
+      "options": [
+        { "text": "Sunrise on a mountain ridge", "tags": ["mountain"] },
+        { "text": "Out on the water at first light", "tags": ["sea"], "next": "sea_extra" },
+        { "text": "Telescope on the roof, still up from last night", "tags": ["space"] }
+      ],
+      "next": "q2"
+    },
+    "sea_extra": {
+      "type": "question",
+      "text": "On the water, what are you in?",
+      "options": [
+        { "text": "A small sailing boat", "tags": ["sea"] },
+        { "text": "A kayak, close to the coast", "tags": ["mountain"] },
+        { "text": "A research vessel", "tags": ["space"] }
+      ],
+      "next": "q2"
+    },
+    "q2": {
+      "type": "question",
+      "text": "What would you pack first?",
+      "options": [
+        { "text": "Sturdy boots", "tags": ["mountain"] },
+        { "text": "A waterproof map", "tags": ["sea"] },
+        { "text": "A star chart", "tags": ["space"] }
+      ],
+      "next": "q3"
+    },
+    "q3": {
+      "type": "question",
+      "text": "What motivates you most?",
+      "options": [
+        { "text": "Reaching the summit", "tags": ["mountain"] },
+        { "text": "Not knowing what is over the horizon", "tags": ["sea"] },
+        { "text": "Answering the biggest questions", "tags": ["space"] }
+      ],
+      "next": "result"
+    },
+    "result": {
+      "type": "branch",
+      "rules": [
+        { "if": { "tags": { "mountain": 2 } }, "goto": "end_mountain" },
+        { "if": { "tags": { "sea": 2 } }, "goto": "end_sea" },
+        { "if": { "tags": { "space": 2 } }, "goto": "end_space" }
+      ],
+      "else": "end_wanderer"
+    },
+    "end_mountain": { "type": "end", "title": "The Mountaineer", "text": "Determined and steady. You like a clear goal and the climb to reach it." },
+    "end_sea": { "type": "end", "title": "The Navigator", "text": "Adventurous and adaptable. You follow the horizon wherever it leads." },
+    "end_space": { "type": "end", "title": "The Astronomer", "text": "Curious and thoughtful. You are driven by the biggest questions." },
+    "end_wanderer": { "type": "end", "title": "The Wanderer", "text": "You do not fit one mould: you mix a bit of everything, and that is a strength." }
+  }
+}
